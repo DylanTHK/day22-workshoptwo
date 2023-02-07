@@ -2,10 +2,15 @@ package com.workshop.day22.model;
 
 import java.util.Date;
 
+import java.io.ByteArrayInputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 import jakarta.json.Json;
 import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 
 public class Rsvp {
     private Integer id;
@@ -57,7 +62,7 @@ public class Rsvp {
                 + confirmationDate + ", comments=" + comments + "]";
     }
 
-    // method to create and return Rsvp Object
+    // method 1: SqlRowSet => Rsvp obj
     public static Rsvp create(SqlRowSet rs) {
         Rsvp rsvp = new Rsvp();
         rsvp.setId(rs.getInt("id"));
@@ -70,6 +75,34 @@ public class Rsvp {
         return rsvp;
     }
 
+    // method 2: String => Rsvp Obj
+    public static Rsvp createObj(String jsonString) throws ParseException {
+        System.out.println("jsonString inside createObj: " + jsonString);
+
+        JsonReader reader = Json.createReader(
+            new ByteArrayInputStream(jsonString.getBytes()));
+
+        System.out.println("JsonReader: " + reader);
+
+        JsonObject obj = reader.readObject();
+        Rsvp r = convertJObject(obj); 
+        System.out.println("Rsvp Object in createObj: " + r);
+        return r;
+        // return null;
+    }
+
+    // method 2.1: JsonObject => Rsvp
+    public static Rsvp convertJObject(JsonObject jObj) throws ParseException {
+        final Rsvp rsvp = new Rsvp();
+        rsvp.setName(jObj.getString("name"));
+        rsvp.setEmail(jObj.getString("email"));
+        rsvp.setPhone(jObj.getString("phone"));
+        rsvp.setConfirmationDate(new SimpleDateFormat("yyyy-MM-dd").parse(jObj.getString("confirmation_date")));
+        rsvp.setComments(jObj.getString("comments"));
+        return rsvp;
+    }
+
+    // this.Rsvp => Json Object
     public JsonObject toJSON() {
         JsonObject jObject = Json.createObjectBuilder()
                 .add("id", getId())

@@ -14,4 +14,4 @@ values ("Pop", "pop@email.com", "99999994", "2020-10-12", "comment body");
 insert into rsvp (rsvp_name, email, phone, confirmation_date, comments) 
 values ("Lop", "lop@email.com", "99999993", "2023-02-28", "comment body");
 insert into rsvp (rsvp_name, email, phone, confirmation_date, comments) 
-values ("Mr No Comments", "mnc@email.com", "99999993",ikk "2023-02-28", null);
+values ("Mr No Comments", "mnc@email.com", "99999993", "2023-02-28", null);

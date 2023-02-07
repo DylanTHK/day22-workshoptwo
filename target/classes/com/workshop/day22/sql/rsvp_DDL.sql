@@ -2,6 +2,7 @@
 create database ws22;
 
 use ws22;
+SET SQL_SAFE_UPDATES = 0;
 
 -- create rsvp table (table for users to store booking details for events)
 create table rsvp (
@@ -18,7 +19,8 @@ create table rsvp (
 select * from rsvp;
 
 -- task 2b) select by rsvp name
-select * from rsvp where rsvp_name = 'Bob';
+select * from rsvp where rsvp_name LIKE CONCAT('%','Bob','%');
+select * from rsvp where rsvp_name LIKE '%Bob%';
 
 -- task 2c) insert rsvp from form
 insert into rsvp (rsvp_name, email, phone, confirmation_date, comments) 
@@ -26,9 +28,12 @@ values ("Bob", "bob@email.com", "99999999", "2023-01-02", "comment body");
 
 -- task 2d) update existing rsvp
 update rsvp
-set email = 'bob@gmail.com'
-where id = 2;
+set rsvp_name='Bobby', email='bob@email.com', phone='11111111', confirmation_date='1990-01-01', comments='No comments'
+where email = 'bob@email.com';
 select * from rsvp;
 
 -- task 2e) count number of rsvps
 select count(*) from rsvp;
+
+-- get ID by email
+select id from rsvp where email = 'freddie@g.com';
