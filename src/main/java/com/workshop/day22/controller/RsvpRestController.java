@@ -178,7 +178,5 @@ public class RsvpRestController {
         }
     }
     
-
-    // add total count of results and actual array in jsonbody
 }
 

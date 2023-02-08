@@ -121,7 +121,7 @@ public class RsvpRepo {
         return rsvpList;
     } 
 
-    // TODO ()
+    // batch operation for inserting
     public int[] batchInsert(List<Rsvp> rsvpList) {
         List<Object[]> params = rsvpList.stream().map(r -> new Object[] {
             r.getName(), r.getEmail(), r.getPhone(), r.getConfirmationDate(), r.getComments()})

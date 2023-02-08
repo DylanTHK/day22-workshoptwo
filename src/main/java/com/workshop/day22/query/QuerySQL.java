@@ -18,4 +18,8 @@ public class QuerySQL {
     public static final String COUNT_RSVP_SQL = "select count(*) as cnt from rsvp";
 
     public static final String GET_ID_BY_EMAIL_SQL = "select id from rsvp where email=?";
+
+    // public static final String BATCH_UPDATE_RSVP_SQL = """
+    //         insert 
+    //         """;
 }
